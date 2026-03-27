@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+scikit-learn
+pandas
+numpy
+tldextract
+beautifulsoup4
+requests
+# python-whois removed for simplicity

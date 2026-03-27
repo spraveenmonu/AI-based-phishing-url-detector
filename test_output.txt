@@ -1,0 +1,9 @@
+Testing Safe URL (Google):
+Prediction: Safe, Probability: 0%
+Features: {'URL Length': 18, 'HTTPS': 'Yes', 'Subdomains': 0, 'Has Password Field': 'No', 'Suspicious Keywords': 'No', 'External Form Action': 'No', 'IP Address Used': 'No'}
+
+-------------------
+
+Testing Mock Phishing Page (Spoofed URL):
+Prediction: Phishing, Probability: 99.0%
+Features: {'URL Length': 91, 'HTTPS': 'No', 'Subdomains': 4, 'Has Password Field': 'Yes', 'Suspicious Keywords': 'Yes (login, update payment)', 'External Form Action': 'No', 'IP Address Used': 'Yes'}

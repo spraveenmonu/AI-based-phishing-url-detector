@@ -1,0 +1,1 @@
+{'url': 'http://example.com', 'prediction': 'Phishing', 'probability': 62.29, 'features': {'Length': 18, 'Dots': 1, 'IP Address used': 'No', '@ Symbol': 'No', 'Hyphens in domain': 'No', 'Subdomains': 0, 'Shortener used': 'No', 'Secure (HTTPS)': 'No'}}

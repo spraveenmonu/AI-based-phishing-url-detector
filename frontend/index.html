@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing URL Detector | Secure surfing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-decor">
+        <div class="stars-container"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-shield-virus"></i>
+                <h1>Safe<span>Scan</span></h1>
+            </div>
+            <p>Advanced AI-powered Phishing URL Detection System</p>
+            <div id="connectionStatus" class="status-badge online">
+                <i class="fas fa-satellite-dish"></i> <span>SYSTEM ONLINE</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="input-card glass">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="url">
+                            <i class="fas fa-link"></i> Scan URL
+                        </button>
+                        <button class="tab-btn" data-tab="file">
+                            <i class="fas fa-file-upload"></i> Scan File
+                        </button>
+                    </div>
+
+                    <div class="tab-content active" id="urlTab">
+                        <h2>Scan URL for Phishing</h2>
+                        <div class="input-wrapper">
+                            <i class="fas fa-link"></i>
+                            <input type="text" id="urlInput"
+                                placeholder="Enter URL to analyze (e.g. http://login-microsoft.verify-secure.com)...">
+                            <button id="scanBtn">
+                                <span class="btn-text">Check Now</span>
+                                <span class="loader hidden"></span>
+                            </button>
+                        </div>
+                        <div class="examples">
+                            <span>Try:</span>
+                            <a href="#" class="example-link">google.com</a>
+                            <a href="#" class="example-link">192.168.1.5/login</a>
+                            <a href="#" class="example-link">paypal-verify-account.com</a>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="fileTab">
+                        <h2>Batch Scan from File</h2>
+                        <div class="file-drop-zone" id="dropZone">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & Drop a text/HTML file or <span>Browse</span></p>
+                            <input type="file" id="fileInput" hidden accept=".txt,.html,.htm,.php">
+                        </div>
+                        <div class="file-info hidden" id="fileInfoDisplay">
+                            <div class="file-details">
+                                <i class="fas fa-file-alt"></i>
+                                <span id="fileName">filename.txt</span>
+                            </div>
+                            <button id="scanFileBtn" class="primary-btn">Scan File</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resultSection" class="result-section hidden">
+                <!-- Single URL Result (Existing) -->
+                <div id="singleResult">
+                    <div class="result-grid">
+                        <div class="main-result-card glass">
+                            <div class="status-indicator" id="statusIndicator">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 id="resultTitle">Legitimate</h3>
+                            <div class="probability-container">
+                                <div class="gauge-wrapper">
+                                    <div class="gauge-fill" id="probabilityFill"></div>
+                                </div>
+                                <span id="probabilityText">98% Confidence</span>
+                            </div>
+                            <p id="urlDisplay" class="truncate"></p>
+                        </div>
+
+                        <div class="feature-breakdown-card glass">
+                            <h3>Feature Breakdown</h3>
+                            <ul id="featuresList">
+                                <!-- Feature items will be injected here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="action-card glass">
+                        <div class="info-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Recommendation</h4>
+                            <p id="recommendationText">This URL appears to be safe. You can proceed with caution. Always
+                                verify the source before entering personal details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch Results (New) -->
+                <div id="batchResults" class="hidden">
+                    <div class="batch-summary-cards">
+                        <div class="summary-card glass total">
+                            <div class="summary-val" id="totalScanned">0</div>
+                            <div class="summary-label">Total URLs</div>
+                        </div>
+                        <div class="summary-card glass phishing">
+                            <div class="summary-val" id="totalPhishing">0</div>
+                            <div class="summary-label">Phishing Detected</div>
+                        </div>
+                        <div class="summary-card glass safe">
+                            <div class="summary-val" id="totalSafe">0</div>
+                            <div class="summary-label">Safe URLs</div>
+                        </div>
+                    </div>
+
+                    <div class="batch-list-card glass">
+                        <h3>Detection Results</h3>
+                        <div class="batch-list-wrapper">
+                            <table id="batchTable">
+                                <thead>
+                                    <tr>
+                                        <th>URL</th>
+                                        <th>Status</th>
+                                        <th>Confidence</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="batchResultsList">
+                                    <!-- Results injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 AI Phishing Detector Pro</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
