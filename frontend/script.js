@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSafe = document.getElementById('totalSafe');
     const batchResultsList = document.getElementById('batchResultsList');
 
-    // Static API URL for local project execution
-    const API_URL = 'http://127.0.0.1:8000';
+    // Dynamic API URL for both local and cloud deployment
+    const API_URL = window.location.protocol === 'file:' ? 'http://127.0.0.1:8000' : window.location.origin;
     let selectedFile = null;
 
     // Surprise: Resilient Connection Health Check with Retry

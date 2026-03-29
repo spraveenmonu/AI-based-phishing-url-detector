@@ -27,7 +27,7 @@ To deploy your project to the public internet for free, please follow these exac
 3.  Connect the `ai-phishing-detector` repository you just pushed.
 4.  **Settings**:
     - **Runtime**: `Python 3`
-    - **Build Command**: `pip install -r requirements.txt && python backend/train_model.py`
+    - **Build Command**: `pip install -r requirements.txt` (We skip training during build to save memory)
     - **Start Command**: `python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
 5.  Click **Deploy Web Service**.
 6.  **Copy the URL**: Once it is "Live", copy the URL (e.g., `https://ai-phishing-detector.onrender.com`).
@@ -37,7 +37,7 @@ To deploy your project to the public internet for free, please follow these exac
 ## Part 3: Update Frontend Link 🌌
 
 1.  Open **[script.js](file:///d:/Projects/AI%20based%20phishing%20url%20detector/frontend/script.js)**.
-2.  Change line 34 from `http://127.0.0.1:8000` to your **Render URL** from the previous step.
+2.  Change line 35 from `http://127.0.0.1:8000` to your **Render URL** from the previous step.
 3.  **Push the update**:
     ```bash
     git add frontend/script.js
