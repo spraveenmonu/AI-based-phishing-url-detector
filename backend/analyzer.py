@@ -107,13 +107,23 @@ def _lookup_in_resources(url: str):
 def analyze_website(url: str):
     """
     Detection strategy:
-    1) Check local resource dataset first (known phishing/safe URLs).
-    2) If not found, use the AI Random Forest model.
-    3) Supplementary check: real-time reachability.
+    1) Extract heuristics first (required for UI).
+    2) Check local resource dataset (known phishing/safe URLs).
+    3) If not found, use the AI Random Forest model.
+    4) Supplementary check: real-time reachability.
     """
+    # 0. Always extract features for the UI
+    feature_vector = url_features_extraction(url)
     features_dict = {
-        "URL Length": len(url),
-        "Source": "AI Engine"
+        "url_length": feature_vector[0],
+        "n_dots": feature_vector[1],
+        "n_at": feature_vector[7],
+        "n_redirection": feature_vector[18],
+        "is_https": feature_vector[19],
+        "is_shortened": feature_vector[20],
+        "having_ip": feature_vector[21],
+        "subdomain_count": feature_vector[22],
+        "Source": "Heuristic Engine"
     }
 
     # 1. Dataset Lookup
@@ -122,8 +132,8 @@ def analyze_website(url: str):
         prediction = "Phishing" if label == 1 else "Safe"
         confidence = 99.0
         features_dict.update({
-            "Source": source_detail,
-            "Detection": "Dataset Match",
+            "Source": f"Database ({source_detail})",
+            "Detection": "Match Found",
             "Result": prediction
         })
         return prediction, confidence, features_dict
@@ -132,8 +142,6 @@ def analyze_website(url: str):
     model = _load_model()
     if model:
         try:
-            # Extract features for the model
-            feature_vector = url_features_extraction(url)
             # Reshape for single sample prediction
             features_np = np.array(feature_vector).reshape(1, -1)
             
@@ -145,10 +153,6 @@ def analyze_website(url: str):
             
             features_dict.update({
                 "Source": "Random Forest AI",
-                "Dots Count": feature_vector[1],
-                "Subdomains": feature_vector[22],
-                "Security": "HTTPS" if feature_vector[19] else "No HTTPS",
-                "IP Check": "IP Address Found" if feature_vector[21] else "No IP Address",
                 "Result": prediction
             })
             return prediction, confidence, features_dict
